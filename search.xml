@@ -55,6 +55,12 @@
 ]]></content>
   </entry>
   <entry>
+    <title>2</title>
+    <url>/2026/01/17/2/</url>
+    <content><![CDATA[<p>test tteesstteee</p>
+]]></content>
+  </entry>
+  <entry>
     <title>test</title>
     <url>/2026/01/17/test/</url>
     <content><![CDATA[<h2 id="渗透测试技巧：巧用目录爆破发现隐藏后台"><a href="#渗透测试技巧：巧用目录爆破发现隐藏后台" class="headerlink" title="渗透测试技巧：巧用目录爆破发现隐藏后台"></a>渗透测试技巧：巧用目录爆破发现隐藏后台</h2><p>在渗透测试的“信息收集”阶段，目录与文件爆破是最快出成果的手段之一。<br>下面分享一条常被忽视却屡试不爽的小技巧：<strong>“先字典、后规则、再人工”</strong>。</p>
@@ -140,11 +146,5 @@
         <tag>NexT</tag>
         <tag>博客美化</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>2</title>
-    <url>/2026/01/17/2/</url>
-    <content><![CDATA[<p>test tteesstteee</p>
-]]></content>
   </entry>
 </search>
