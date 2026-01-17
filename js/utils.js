@@ -135,76 +135,10 @@ NexT.utils = {
   },
 
   registerScrollPercent: function () {
-    var THRESHOLD = 50;
     var backToTop = document.querySelector('.back-to-top');
-    var readingProgressBar = document.querySelector('.reading-progress-bar');
-    if (!backToTop && !readingProgressBar) return;
+    if (!backToTop) return;
 
-    var backToTopText = backToTop && backToTop.querySelector('span');
-    var contentVisibilityHeight = 1;
-    var lastBackToTopOn = null;
-    var lastScrollPercentInt = -1;
-    var lastScrollPercentWidth = '';
-    var ticking = false;
-
-    var recalc = () => {
-      var winHeight = window.innerHeight;
-      var scrollHeight = document.documentElement.scrollHeight;
-      contentVisibilityHeight = Math.max(scrollHeight - winHeight, 1);
-    };
-
-    var update = () => {
-      ticking = false;
-      var scrollTop = window.scrollY;
-      var scrollPercent = Math.min(100 * scrollTop / contentVisibilityHeight, 100);
-
-      if (backToTop) {
-        var backToTopOn = scrollTop > THRESHOLD;
-        if (backToTopOn !== lastBackToTopOn) {
-          backToTop.classList.toggle('back-to-top-on', backToTopOn);
-          lastBackToTopOn = backToTopOn;
-        }
-        if (CONFIG.back2top.scrollpercent && backToTopText) {
-          var scrollPercentInt = Math.round(scrollPercent);
-          if (scrollPercentInt !== lastScrollPercentInt) {
-            backToTopText.innerText = scrollPercentInt + '%';
-            lastScrollPercentInt = scrollPercentInt;
-          }
-        }
-      }
-
-      if (readingProgressBar) {
-        var width = scrollPercent.toFixed(2) + '%';
-        if (width !== lastScrollPercentWidth) {
-          readingProgressBar.style.width = width;
-          lastScrollPercentWidth = width;
-        }
-      }
-    };
-
-    var requestTick = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    };
-
-    recalc();
-    requestTick();
-    window.addEventListener('scroll', requestTick, { passive: true });
-    window.addEventListener('resize', () => {
-      recalc();
-      requestTick();
-    }, { passive: true });
-    window.addEventListener('load', () => {
-      recalc();
-      requestTick();
-    });
-    window.addEventListener('pjax:success', () => {
-      recalc();
-      requestTick();
-    });
-
-    backToTop && backToTop.addEventListener('click', () => {
+    backToTop.addEventListener('click', () => {
       window.anime({
         targets: document.scrollingElement,
         duration: 500,
