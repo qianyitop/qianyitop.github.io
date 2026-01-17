@@ -1302,7 +1302,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9c5398;
+  background: #7161ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2824,16 +2824,22 @@ body {
 }
 .post-block,
 .comments,
-.pagination,
-.header-inner,
-.sidebar-inner {
+.pagination {
   background: var(--card-bg-color) !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
   margin-bottom: 24px !important;
   padding: 20px !important;
   border: none !important;
-  box-sizing: border-box !important;
+}
+.header-inner,
+.sidebar-inner {
+  background: var(--card-bg-color) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
+  margin-bottom: 24px !important;
+  border: none !important;
+  padding: 0 !important;
 }
 .header-inner {
   overflow: hidden;
