@@ -1,3 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>1</title>
+    <url>/2026/01/17/1/</url>
+    <content><![CDATA[<p>这篇文章记录我对本站（Hexo + NexT &#x2F; Gemini scheme）做的一次「轻量但耐看」的美化过程：尽量不改主题源码，主要通过 <code>source/_data/next.yml</code> + 自定义 Stylus 覆盖变量与样式来实现。这样后续升级主题也更省心。</p>
+<span id="more"></span>
+
+<p><strong>目标</strong></p>
+<ul>
+<li>让页面更“干净”：卡片化、圆角、阴影更克制</li>
+<li>让阅读更舒服：更合适的字号&#x2F;行距&#x2F;字体栈、阅读进度条</li>
+<li>让交互更顺手：代码块一键复制、图片点击放大</li>
+<li>兼容深色模式：暗色下也保持对比度与层次</li>
+</ul>
+<h2 id="1-找到正确的配置入口"><a href="#1-找到正确的配置入口" class="headerlink" title="1. 找到正确的配置入口"></a>1. 找到正确的配置入口</h2><p>本站主题是 NexT，并且支持用 <code>source/_data/next.yml</code> 合并配置（不需要直接改主题目录下的 <code>_config.yml</code>）。</p>
+<ul>
+<li>站点配置：<a href="file:///e:/Sec/blog/_config.yml#L1-L123">e:\Sec\blog\_config.yml</a></li>
+<li>主题默认配置：<a href="file:///e:/Sec/blog/themes/hexo-theme-next/_config.yml#L1-L120">themes\hexo-theme-next\_config.yml</a></li>
+<li>NexT 会把 <code>source/_data/next.yml</code> 合并进主题配置（可追溯到 <a href="file:///e:/Sec/blog/themes/hexo-theme-next/scripts/events/lib/config.js#L18-L35">config.js</a>）</li>
+</ul>
+<h2 id="2-用-next-yml-开启“常用美化功能”"><a href="#2-用-next-yml-开启“常用美化功能”" class="headerlink" title="2. 用 next.yml 开启“常用美化功能”"></a>2. 用 next.yml 开启“常用美化功能”</h2><p>新增并写入：<a href="file:///e:/Sec/blog/source/_data/next.yml">source\_data\next.yml</a></p>
+<p>我主要做了这些开关：</p>
+<ul>
+<li>开启阅读进度条（顶部细条）</li>
+<li>开启代码块复制按钮（mac 风格）</li>
+<li>开启图片点击放大（mediumzoom）</li>
+<li>开启 pangu（中英文自动加空格）</li>
+<li>TOC 支持自动换行（标题长的时候更友好）</li>
+</ul>
+<h2 id="3-通过变量覆盖做统一的视觉基调"><a href="#3-通过变量覆盖做统一的视觉基调" class="headerlink" title="3. 通过变量覆盖做统一的视觉基调"></a>3. 通过变量覆盖做统一的视觉基调</h2><p>NexT 的 CSS 使用 Stylus 变量组织，这意味着我们可以通过注入一个 <code>variables.styl</code> 来覆盖主题默认值。</p>
+<p>新增并写入：<a href="file:///e:/Sec/blog/source/_data/variables.styl">source\_data\variables.styl</a></p>
+<p>这一步我做了几件事：</p>
+<ul>
+<li>背景色与卡片色：从“纯白&#x2F;纯灰”改为更柔和的浅色底，并给暗色做了更深的底色</li>
+<li>统一圆角：提升到 14px，让卡片更现代</li>
+<li>阴影更克制：用更柔和的扩散阴影来做层次</li>
+<li>字体栈更稳：不依赖远程字体，优先使用系统字体（Windows&#x2F;macOS&#x2F;移动端都有不错效果）</li>
+</ul>
+<h2 id="4-用-styles-styl-做“少量但关键”的细节增强"><a href="#4-用-styles-styl-做“少量但关键”的细节增强" class="headerlink" title="4. 用 styles.styl 做“少量但关键”的细节增强"></a>4. 用 styles.styl 做“少量但关键”的细节增强</h2><p>新增并写入：<a href="file:///e:/Sec/blog/source/_data/styles.styl">source\_data\styles.styl</a></p>
+<p>主要增强点：</p>
+<ul>
+<li>背景做轻微渐变与光晕（固定背景，滚动时更有层次）</li>
+<li>卡片加半透明 + 模糊（backdrop-filter），并补了暗色边框</li>
+<li>卡片 hover 轻微上浮（更“可点击”）</li>
+<li>图片圆角与阴影，提升观感</li>
+<li>代码块圆角与裁切，整体更统一</li>
+</ul>
+<h2 id="5-本次改动清单"><a href="#5-本次改动清单" class="headerlink" title="5. 本次改动清单"></a>5. 本次改动清单</h2><ul>
+<li>新增主题合并配置：<a href="file:///e:/Sec/blog/source/_data/next.yml">source\_data\next.yml</a></li>
+<li>新增变量覆盖：<a href="file:///e:/Sec/blog/source/_data/variables.styl">source\_data\variables.styl</a></li>
+<li>新增样式增强：<a href="file:///e:/Sec/blog/source/_data/styles.styl">source\_data\styles.styl</a></li>
+</ul>
+<p>如果你也在用 NexT，建议优先走 <code>source/_data</code> 这条“注入式”方案：改动更聚焦，也更利于维护。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>给 Hexo + NexT 做一次轻量美化（含配置清单）</title>
+    <url>/2026/01/17/%E7%BE%8E%E5%8C%96Hexo-NexT%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p>这篇文章记录我对本站（Hexo + NexT &#x2F; Gemini scheme）做的一次「轻量但耐看」的美化过程：尽量不改主题源码，主要通过 <code>source/_data/next.yml</code> + 自定义 Stylus 覆盖变量与样式来实现。这样后续升级主题也更省心。</p>
+<span id="more"></span>
+
+<p><strong>目标</strong></p>
+<ul>
+<li>让页面更“干净”：卡片化、圆角、阴影更克制</li>
+<li>让阅读更舒服：更合适的字号&#x2F;行距&#x2F;字体栈、阅读进度条</li>
+<li>让交互更顺手：代码块一键复制、图片点击放大</li>
+<li>兼容深色模式：暗色下也保持对比度与层次</li>
+</ul>
+<h2 id="1-找到正确的配置入口"><a href="#1-找到正确的配置入口" class="headerlink" title="1. 找到正确的配置入口"></a>1. 找到正确的配置入口</h2><p>本站主题是 NexT，并且支持用 <code>source/_data/next.yml</code> 合并配置（不需要直接改主题目录下的 <code>_config.yml</code>）。</p>
+<ul>
+<li>站点配置：<a href="file:///e:/Sec/blog/_config.yml#L1-L123">e:\Sec\blog\_config.yml</a></li>
+<li>主题默认配置：<a href="file:///e:/Sec/blog/themes/hexo-theme-next/_config.yml#L1-L120">themes\hexo-theme-next\_config.yml</a></li>
+<li>NexT 会把 <code>source/_data/next.yml</code> 合并进主题配置（可追溯到 <a href="file:///e:/Sec/blog/themes/hexo-theme-next/scripts/events/lib/config.js#L18-L35">config.js</a>）</li>
+</ul>
+<h2 id="2-用-next-yml-开启“常用美化功能”"><a href="#2-用-next-yml-开启“常用美化功能”" class="headerlink" title="2. 用 next.yml 开启“常用美化功能”"></a>2. 用 next.yml 开启“常用美化功能”</h2><p>新增并写入：<a href="file:///e:/Sec/blog/source/_data/next.yml">source\_data\next.yml</a></p>
+<p>我主要做了这些开关：</p>
+<ul>
+<li>开启阅读进度条（顶部细条）</li>
+<li>开启代码块复制按钮（mac 风格）</li>
+<li>开启图片点击放大（mediumzoom）</li>
+<li>开启 pangu（中英文自动加空格）</li>
+<li>TOC 支持自动换行（标题长的时候更友好）</li>
+</ul>
+<h2 id="3-通过变量覆盖做统一的视觉基调"><a href="#3-通过变量覆盖做统一的视觉基调" class="headerlink" title="3. 通过变量覆盖做统一的视觉基调"></a>3. 通过变量覆盖做统一的视觉基调</h2><p>NexT 的 CSS 使用 Stylus 变量组织，这意味着我们可以通过注入一个 <code>variables.styl</code> 来覆盖主题默认值。</p>
+<p>新增并写入：<a href="file:///e:/Sec/blog/source/_data/variables.styl">source\_data\variables.styl</a></p>
+<p>这一步我做了几件事：</p>
+<ul>
+<li>背景色与卡片色：从“纯白&#x2F;纯灰”改为更柔和的浅色底，并给暗色做了更深的底色</li>
+<li>统一圆角：提升到 14px，让卡片更现代</li>
+<li>阴影更克制：用更柔和的扩散阴影来做层次</li>
+<li>字体栈更稳：不依赖远程字体，优先使用系统字体（Windows&#x2F;macOS&#x2F;移动端都有不错效果）</li>
+</ul>
+<h2 id="4-用-styles-styl-做“少量但关键”的细节增强"><a href="#4-用-styles-styl-做“少量但关键”的细节增强" class="headerlink" title="4. 用 styles.styl 做“少量但关键”的细节增强"></a>4. 用 styles.styl 做“少量但关键”的细节增强</h2><p>新增并写入：<a href="file:///e:/Sec/blog/source/_data/styles.styl">source\_data\styles.styl</a></p>
+<p>主要增强点：</p>
+<ul>
+<li>背景做轻微渐变与光晕（固定背景，滚动时更有层次）</li>
+<li>卡片加半透明 + 模糊（backdrop-filter），并补了暗色边框</li>
+<li>卡片 hover 轻微上浮（更“可点击”）</li>
+<li>图片圆角与阴影，提升观感</li>
+<li>代码块圆角与裁切，整体更统一</li>
+</ul>
+<h2 id="5-本次改动清单"><a href="#5-本次改动清单" class="headerlink" title="5. 本次改动清单"></a>5. 本次改动清单</h2><ul>
+<li>新增主题合并配置：<a href="file:///e:/Sec/blog/source/_data/next.yml">source\_data\next.yml</a></li>
+<li>新增变量覆盖：<a href="file:///e:/Sec/blog/source/_data/variables.styl">source\_data\variables.styl</a></li>
+<li>新增样式增强：<a href="file:///e:/Sec/blog/source/_data/styles.styl">source\_data\styles.styl</a></li>
+</ul>
+<p>如果你也在用 NexT，建议优先走 <code>source/_data</code> 这条“注入式”方案：改动更聚焦，也更利于维护。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>博客美化</tag>
+      </tags>
+  </entry>
 </search>
