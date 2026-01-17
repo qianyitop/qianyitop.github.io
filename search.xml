@@ -55,6 +55,34 @@
 ]]></content>
   </entry>
   <entry>
+    <title>test</title>
+    <url>/2026/01/17/test/</url>
+    <content><![CDATA[<h2 id="渗透测试技巧：巧用目录爆破发现隐藏后台"><a href="#渗透测试技巧：巧用目录爆破发现隐藏后台" class="headerlink" title="渗透测试技巧：巧用目录爆破发现隐藏后台"></a>渗透测试技巧：巧用目录爆破发现隐藏后台</h2><p>在渗透测试的“信息收集”阶段，目录与文件爆破是最快出成果的手段之一。<br>下面分享一条常被忽视却屡试不爽的小技巧：<strong>“先字典、后规则、再人工”</strong>。</p>
+<ol>
+<li><p>先字典<br>别一上来就甩 20 万条大字典。先用 3～5 份“业务敏感小字典”跑一遍，比如：  </p>
+<ul>
+<li>常见后台：<code>admin</code>、<code>manager</code>、<code>console</code>、<code>system</code>  </li>
+<li>语言特征：<code>phpmyadmin</code>、<code>api-docs</code>、<code>swagger-ui</code>  </li>
+<li>云原生路径：<code>actuator</code>、<code>metrics</code>、<code>env</code><br>小字典跑完往往就能命中 60 % 的隐藏入口，省时省力。</li>
+</ul>
+</li>
+<li><p>后规则<br>当小字典无收获时，启动“规则引擎”——用 ffuf &#x2F; feroxbuster 的 <code>-fw</code> 自动过滤 404 页面宽度，再配合自定义正则剔除“假 200”页面（如“系统繁忙，请稍后再试”）。<br>规则示例（ffuf）：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-fw 5 -mr &quot;((?i)error|warning|exception)&quot;</span><br></pre></td></tr></table></figure>
+<p>这样可把 8 万条字典的误报率压到 5 % 以下。</p>
+</li>
+<li><p>再人工<br>爆破结果出来后，别急着丢给漏洞扫描器。先人工快速浏览响应体，重点看三类特征：  </p>
+<ul>
+<li>响应里出现 <code>login</code>、<code>password</code>、<code>token</code> 关键字 → 登录口  </li>
+<li>Content-Length 异常小（&lt;100 B）却返回 200 → 可能是未授权接口  </li>
+<li>响应头出现 <code>X-Accel-Redirect</code>、<code>Location: internal-</code> → Nginx 内部跳转，大概率藏着“换皮后台”</li>
+</ul>
+</li>
+</ol>
+<p><strong>Bonus 技巧</strong><br>如果目标站使用 CDN，把 <code>Host</code> 头改成内网 IP 再跑一次字典，经常能直接命中源站隐藏目录，从而绕过 CDN 缓存与 WAF 拦截。</p>
+<p>一句话总结：<br><strong>“小字典快速验证 → 规则降噪 → 人工二次筛查”</strong>，三步下来，隐藏后台无处遁形。祝各位早日拿到高危及高危以上的“小可爱”。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>给 Hexo + NexT 做一次轻量美化（含配置清单）</title>
     <url>/2026/01/17/%E7%BE%8E%E5%8C%96Hexo-NexT%E4%B8%BB%E9%A2%98/</url>
     <content><![CDATA[<p>这篇文章记录我对本站（Hexo + NexT &#x2F; Gemini scheme）做的一次「轻量但耐看」的美化过程：尽量不改主题源码，主要通过 <code>source/_data/next.yml</code> + 自定义 Stylus 覆盖变量与样式来实现。这样后续升级主题也更省心。</p>
@@ -112,33 +140,5 @@
         <tag>NexT</tag>
         <tag>博客美化</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>test</title>
-    <url>/2026/01/17/test/</url>
-    <content><![CDATA[<h2 id="渗透测试技巧：巧用目录爆破发现隐藏后台"><a href="#渗透测试技巧：巧用目录爆破发现隐藏后台" class="headerlink" title="渗透测试技巧：巧用目录爆破发现隐藏后台"></a>渗透测试技巧：巧用目录爆破发现隐藏后台</h2><p>在渗透测试的“信息收集”阶段，目录与文件爆破是最快出成果的手段之一。<br>下面分享一条常被忽视却屡试不爽的小技巧：<strong>“先字典、后规则、再人工”</strong>。</p>
-<ol>
-<li><p>先字典<br>别一上来就甩 20 万条大字典。先用 3～5 份“业务敏感小字典”跑一遍，比如：  </p>
-<ul>
-<li>常见后台：<code>admin</code>、<code>manager</code>、<code>console</code>、<code>system</code>  </li>
-<li>语言特征：<code>phpmyadmin</code>、<code>api-docs</code>、<code>swagger-ui</code>  </li>
-<li>云原生路径：<code>actuator</code>、<code>metrics</code>、<code>env</code><br>小字典跑完往往就能命中 60 % 的隐藏入口，省时省力。</li>
-</ul>
-</li>
-<li><p>后规则<br>当小字典无收获时，启动“规则引擎”——用 ffuf &#x2F; feroxbuster 的 <code>-fw</code> 自动过滤 404 页面宽度，再配合自定义正则剔除“假 200”页面（如“系统繁忙，请稍后再试”）。<br>规则示例（ffuf）：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-fw 5 -mr &quot;((?i)error|warning|exception)&quot;</span><br></pre></td></tr></table></figure>
-<p>这样可把 8 万条字典的误报率压到 5 % 以下。</p>
-</li>
-<li><p>再人工<br>爆破结果出来后，别急着丢给漏洞扫描器。先人工快速浏览响应体，重点看三类特征：  </p>
-<ul>
-<li>响应里出现 <code>login</code>、<code>password</code>、<code>token</code> 关键字 → 登录口  </li>
-<li>Content-Length 异常小（&lt;100 B）却返回 200 → 可能是未授权接口  </li>
-<li>响应头出现 <code>X-Accel-Redirect</code>、<code>Location: internal-</code> → Nginx 内部跳转，大概率藏着“换皮后台”</li>
-</ul>
-</li>
-</ol>
-<p><strong>Bonus 技巧</strong><br>如果目标站使用 CDN，把 <code>Host</code> 头改成内网 IP 再跑一次字典，经常能直接命中源站隐藏目录，从而绕过 CDN 缓存与 WAF 拦截。</p>
-<p>一句话总结：<br><strong>“小字典快速验证 → 规则降噪 → 人工二次筛查”</strong>，三步下来，隐藏后台无处遁形。祝各位早日拿到高危及高危以上的“小可爱”。</p>
-]]></content>
   </entry>
 </search>
