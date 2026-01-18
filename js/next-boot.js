@@ -2,7 +2,7 @@
 
 NexT.boot = {};
 
-NexT.boot.registerEvents = function() {
+NexT.boot.registerEvents = function () {
 
   NexT.utils.registerScrollPercent();
   NexT.utils.registerCanIUseTag();
@@ -16,7 +16,7 @@ NexT.boot.registerEvents = function() {
     if (typeof Velocity === 'function') {
       Velocity(siteNav, animateAction, {
         duration: 200,
-        complete: function() {
+        complete: function () {
           siteNav.classList.toggle('site-nav-on');
         }
       });
@@ -37,20 +37,20 @@ NexT.boot.registerEvents = function() {
       var target = targets[index];
       var currentTarget = targets[1 - index];
       window.anime({
-        targets : currentTarget,
+        targets: currentTarget,
         duration: TAB_ANIMATE_DURATION,
-        easing  : 'linear',
-        opacity : 0,
+        easing: 'linear',
+        opacity: 0,
         complete: () => {
           // Prevent adding TOC to Overview if Overview was selected when close & open sidebar.
           currentTarget.classList.remove(activePanelClassName);
           target.style.opacity = 0;
           target.classList.add(activePanelClassName);
           window.anime({
-            targets : target,
+            targets: target,
             duration: TAB_ANIMATE_DURATION,
-            easing  : 'linear',
-            opacity : 1
+            easing: 'linear',
+            opacity: 1
           });
         }
       });
@@ -73,14 +73,14 @@ NexT.boot.registerEvents = function() {
   });
 };
 
-NexT.boot.refresh = function() {
+NexT.boot.refresh = function () {
 
   /**
    * Register JS handlers by condition option.
    * Need to add config option in Front-End at 'layout/_partials/head.swig' file.
    */
   CONFIG.fancybox && NexT.utils.wrapImageWithFancyBox();
-  CONFIG.mediumzoom && window.mediumZoom('.post-body :not(a) > img, .post-body > img');
+  CONFIG.mediumzoom && window.mediumZoom && window.mediumZoom('.post-body :not(a) > img, .post-body > img');
   CONFIG.lazyload && window.lozad('.post-body img').observe();
   CONFIG.pangu && window.pangu.spacingPage();
 
@@ -94,7 +94,7 @@ NexT.boot.refresh = function() {
   NexT.utils.registerVideoIframe();
 };
 
-NexT.boot.motion = function() {
+NexT.boot.motion = function () {
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
     NexT.motion.integrator
@@ -111,4 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
   NexT.boot.registerEvents();
   NexT.boot.refresh();
   NexT.boot.motion();
+});
+
+window.addEventListener('pageshow', () => {
+  NexT.utils.updateSidebarPosition();
 });
